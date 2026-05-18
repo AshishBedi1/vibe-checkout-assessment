@@ -1,0 +1,12 @@
+{
+  "description": "When a user adds the same product twice and goes through checkout, the cart total does not match the quantity they added. The pay control on checkout may stay unavailable, and completing payment can fail with an invalid amount error even when the cart looks populated.",
+  "expectedOutcome": "When the user adds products, opens the cart, and completes checkout, the subtotal should reflect quantity times price, payment should be available with items in the cart, and a successful order confirmation should appear.",
+  "hint": "Run npm run test:e2e after each change; use the failing step to decide what to fix next.",
+  "difficulty": "Mid",
+  "competency": "Vibe Coding",
+  "bugFilePath": "src/context/CartContext.tsx",
+  "solution": "Fix cart subtotal to multiply unitPrice by quantity in CartContext. Fix CheckoutPage so canPay is true when items exist and subtotal is positive. Fix checkoutClient to accept cent amounts above 500 (remove the erroneous upper cap that treats cents like dollars).",
+  "solutionCode": "// CartContext.tsx subtotal\n() => items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0),\n\n// CheckoutPage.tsx\nconst canPay = items.length > 0 && subtotal > 0;\n\n// checkoutClient.ts\nif (!Number.isFinite(totalCents) || totalCents <= 0) {\n  return { ok: false, message: 'Invalid payment amount' };\n}",
+  "playwrightTests": "Tests fail on the bug branch for the checkout flow until cart math, checkout pay availability, and payment validation are all fixed; tests pass on main and after the complete fix.",
+  "playwrightTestSnippets": "tests/checkout-flow.spec.ts"
+}

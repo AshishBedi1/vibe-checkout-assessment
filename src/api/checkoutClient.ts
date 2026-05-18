@@ -6,7 +6,7 @@ import type { CheckoutResult } from '../types';
 export async function submitCheckout(totalCents: number): Promise<CheckoutResult> {
   await new Promise((r) => setTimeout(r, 120));
 
-  if (!Number.isFinite(totalCents) || totalCents <= 0) {
+  if (!Number.isFinite(totalCents) || totalCents <= 0 || totalCents > 500) {
     return { ok: false, message: 'Invalid payment amount' };
   }
 

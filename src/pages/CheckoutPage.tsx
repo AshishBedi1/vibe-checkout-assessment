@@ -10,7 +10,7 @@ export function CheckoutPage() {
   const [orderComplete, setOrderComplete] = useState(false);
   const [paying, setPaying] = useState(false);
 
-  const canPay = items.length > 0 && subtotal > 0;
+  const canPay = items.length === 0;
 
   async function handlePay() {
     setError(null);
