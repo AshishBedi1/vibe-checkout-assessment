@@ -4,7 +4,7 @@ import { submitCheckout } from '../api/checkoutClient';
 import { useCart } from '../context/CartContext';
 
 export function CheckoutPage() {
-  const { items, subtotal, itemCount, clearCart } = useCart();
+  const { items, subtotal, itemCount, totalDue, discountAmount, clearCart } = useCart();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [orderComplete, setOrderComplete] = useState(false);
@@ -17,7 +17,7 @@ export function CheckoutPage() {
     setSuccess(null);
     setPaying(true);
     try {
-      const totalCents = Math.round(subtotal * 100);
+      const totalCents = Math.round(totalDue * 100);
       const result = await submitCheckout(totalCents);
       if (!result.ok) {
         setError(result.message || 'Payment failed');
@@ -48,7 +48,11 @@ export function CheckoutPage() {
       ) : null}
       {!orderComplete && items.length > 0 ? (
         <>
-          <p data-testid="checkout-subtotal">Total due: ${subtotal.toFixed(2)}</p>
+          <p data-testid="checkout-subtotal">Subtotal: ${subtotal.toFixed(2)}</p>
+          {discountAmount > 0 ? (
+            <p data-testid="checkout-discount">Discount: −${discountAmount.toFixed(2)}</p>
+          ) : null}
+          <p data-testid="checkout-total-due">Total due: ${totalDue.toFixed(2)}</p>
           <p data-testid="checkout-item-count">Items: {itemCount}</p>
           <button
             type="button"

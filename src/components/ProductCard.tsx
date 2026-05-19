@@ -6,6 +6,9 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="card" data-testid={`product-card-${product.id}`}>
+      <p className="product-category" data-testid={`product-category-${product.id}`}>
+        {product.category}
+      </p>
       <h3>{product.name}</h3>
       <p>${product.price.toFixed(2)}</p>
       <button

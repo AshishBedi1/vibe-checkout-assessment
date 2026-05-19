@@ -14,7 +14,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev:e2e',
     url: 'http://127.0.0.1:5174',
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     timeout: 120000
   }
 });

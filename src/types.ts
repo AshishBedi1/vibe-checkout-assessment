@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
+  category: 'Beverages' | 'Pantry';
 }
 
 export interface CartItem {
@@ -16,3 +17,6 @@ export interface CheckoutResult {
   orderId?: string;
   message?: string;
 }
+
+export type ProductCategory = Product['category'] | 'all';
+export type ProductSort = 'name-asc' | 'price-asc' | 'price-desc';

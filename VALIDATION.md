@@ -1,16 +1,20 @@
 # E2E validation log
 
-Commands: `npm install` then `npm run test:e2e` (app on **http://127.0.0.1:5174**).
+Commands: `npm install` then `npm run test:e2e`.
 
-| Branch | Expected | Result |
-|--------|----------|--------|
-| `main` | All steps pass | PASS (verified locally) |
-| `bug/vibe/multi-checkout/v1` | Fails until all 3 bugs fixed | FAIL at cart subtotal / pay / success |
+| Branch | Expected |
+|--------|----------|
+| `main` | PASS — full catalog → coupon → checkout flow |
+| `bug/vibe/multi-checkout/v1` | FAIL until all bugs in MAINTAINERS.md are fixed |
 
-## Partial-fix expectations (bug branch)
+## Golden path (E2E)
 
-| Fixes applied | Expected E2E |
-|---------------|--------------|
-| Bug 1 only (cart total) | Still fails (pay disabled or payment) |
-| Bugs 1 + 2 | Still fails (payment API) |
-| All 3 | PASS |
+1. Search `tea` → Herbal Tea visible  
+2. Filter Beverages  
+3. Add tea × 2  
+4. Cart subtotal $24.00, SAVE10 → total $21.60  
+5. Checkout → Pay → success  
+
+## Partial fixes (bug branch)
+
+Any single-area fix (search only, cart math only, etc.) should still leave E2E failing.
