@@ -1,5 +1,10 @@
 # Maintainer notes (not for candidates)
 
+<<<<<<< Updated upstream
+=======
+Candidate-facing copy lives in `.savyre/bug-info.json` (`description`, `expectedOutcome`, mild `hint`). It is intentionally vague so candidates must explore and write their own AI prompts. This file lists every defect and fix.
+
+>>>>>>> Stashed changes
 ## Features (assessment branch)
 
 - Product **search** + **Search** button
@@ -9,7 +14,11 @@
 - Cart **+ / − / Remove** per line
 - Full flow covered by `tests/checkout-flow.spec.ts`
 
+<<<<<<< Updated upstream
 ## Nine intentional bugs on `bug/vibe/multi-checkout/v1`
+=======
+## Ten intentional bugs on `bug/vibe/multi-checkout/v1`
+>>>>>>> Stashed changes
 
 | # | File | Symptom | Fix |
 |---|------|---------|-----|
